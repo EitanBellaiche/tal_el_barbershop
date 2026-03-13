@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tal El Barber Shop | טל אלביליה | נהריה</title>
+    <meta
+      name="description"
+      content="טל אלביליה - ברבר בנהריה. תספורות מדויקות, פיידים נקיים, סטייל חד ושירות אישי. הרב מימון 18, נהריה. לקביעת תור: 052-208-5223."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0b0a;
+        --panel: rgba(17, 17, 15, 0.78);
+        --panel-solid: #151412;
+        --text: #f3ead7;
+        --muted: #c5b89c;
+        --line: rgba(212, 177, 98, 0.22);
+        --gold: #d6ad63;
+        --gold-strong: #f0cf8f;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        --radius: 28px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Assistant", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(214, 173, 99, 0.18), transparent 32%),
+          radial-gradient(circle at 85% 20%, rgba(214, 173, 99, 0.1), transparent 25%),
+          linear-gradient(180deg, #0a0908 0%, #11100f 45%, #090909 100%);
+        color: var(--text);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 30px 30px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.08));
+        pointer-events: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .container {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(18px);
+        background: rgba(8, 8, 8, 0.62);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .topbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand img {
+        width: 54px;
+        height: 54px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid rgba(214, 173, 99, 0.28);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+
+      .brand small,
+      .eyebrow,
+      .section-tag {
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .brand strong {
+        display: block;
+        font-size: 1.1rem;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .nav a {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav .top-cta {
+        color: #0b0b0a;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--gold-strong), var(--gold));
+        box-shadow: 0 12px 30px rgba(214, 173, 99, 0.22);
+      }
+
+      .nav a.is-active {
+        color: var(--gold-strong);
+      }
+
+      .hero {
+        padding: 34px 0 26px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .card,
+      .gallery-card,
+      .contact-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-copy {
+        padding: 34px;
+      }
+
+      .hero-copy::after,
+      .card::after,
+      .contact-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 26%);
+        pointer-events: none;
+      }
+
+      .eyebrow,
+      .section-tag {
+        font-size: 0.78rem;
+        margin-bottom: 14px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 0.96;
+      }
+
+      h1,
+      h2 {
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      h1 {
+        font-size: clamp(3.1rem, 7vw, 6.2rem);
+      }
+
+      .hero-copy p {
+        margin: 18px 0 0;
+        max-width: 42ch;
+        color: #ede1c8;
+        font-size: 1.12rem;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        color: #130f08;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--gold-strong), var(--gold));
+      }
+
+      .btn-secondary {
+        color: var(--text);
+        border-color: rgba(214, 173, 99, 0.36);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .stat {
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.15rem;
+      }
+
+      .stat span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .hero-visual {
+        min-height: 640px;
+        background:
+          linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.68)),
+          url("IMG_5944.jpeg") center/cover;
+      }
+
+      .hero-badge {
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        bottom: 22px;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px;
+        background: rgba(8, 8, 8, 0.76);
+        border: 1px solid rgba(214, 173, 99, 0.22);
+        border-radius: 22px;
+        backdrop-filter: blur(12px);
+      }
+
+      .hero-badge strong {
+        display: block;
+        font-size: 1.08rem;
+      }
+
+      .hero-badge span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .section {
+        padding: 28px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      h2 {
+        font-size: clamp(2.4rem, 5vw, 4.3rem);
+      }
+
+      .section-head p {
+        max-width: 44ch;
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .card h3 {
+        font-size: 1.45rem;
+        margin-bottom: 14px;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr 0.85fr;
+        gap: 18px;
+      }
+
+      .gallery-card {
+        min-height: 330px;
+      }
+
+      .gallery-card.large {
+        min-height: 680px;
+      }
+
+      .gallery-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .gallery-card .label {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        padding: 10px 14px;
+        color: #fff8ea;
+        background: rgba(7, 7, 7, 0.76);
+        border: 1px solid rgba(214, 173, 99, 0.22);
+        border-radius: 999px;
+        backdrop-filter: blur(10px);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 18px;
+      }
+
+      .contact-card {
+        padding: 28px;
+        background: linear-gradient(180deg, rgba(20, 18, 15, 0.92), rgba(10, 10, 10, 0.95));
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .contact-item {
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .contact-item strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .contact-item span,
+      .contact-item a {
+        color: var(--muted);
+      }
+
+      .cta-panel {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .cta-box {
+        padding: 20px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .cta-box strong {
+        display: block;
+        font-size: 1.15rem;
+        margin-bottom: 8px;
+      }
+
+      .cta-box p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .footer {
+        padding: 28px 0 46px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .contact-grid,
+        .gallery,
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-card.large {
+          min-height: 420px;
+        }
+
+        .hero-visual {
+          min-height: 520px;
+        }
+
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .topbar-inner,
+        .brand {
+          align-items: start;
+        }
+
+        .topbar-inner {
+          flex-direction: column;
+        }
+
+        .hero-copy,
+        .contact-card,
+        .card {
+          padding: 22px;
+        }
+
+        .hero-stats,
+        .cta-panel {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 3rem;
+        }
+
+        .hero-badge {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="#top">
+          <img src="logo.jpeg" alt="Tal El Hair Studio" />
+          <div>
+            <small>Tal El Barber Shop</small>
+            <strong>טל אלביליה</strong>
+          </div>
+        </a>
+        <nav class="nav">
+          <a href="#gallery">עבודות</a>
+          <a href="#about">הסגנון</a>
+          <a href="#contact">יצירת קשר</a>
+          <a class="btn top-cta" href="tel:0522085223">חייגו עכשיו</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero container">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <div class="eyebrow">Nahariya Barber Experience</div>
+            <h1>תספורת מדויקת.<br />נוכחות נקייה.<br />סטייל שנשאר.</h1>
+            <p>
+              טל אלביליה מביא לברב מימון 18 בנהריה לוק מדויק, יחס אישי ועבודה נקייה
+              למי שלא מתפשר על הפרטים הקטנים. תספורות גברים, פיידים, קווים חדים
+              ועיצוב שמתאים בדיוק למראה שלך.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://wa.me/972522085223" target="_blank" rel="noreferrer">לקביעת תור בוואטסאפ</a>
+              <a class="btn btn-secondary" href="https://www.instagram.com/tal_el_barbershop?igsh=MXRvczY3djR4emp0cQ==" target="_blank" rel="noreferrer">לאינסטגרם</a>
+              <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&query=%D7%91%D7%A8%D7%91+%D7%9E%D7%99%D7%9E%D7%95%D7%9F+18+%D7%A0%D7%94%D7%A8%D7%99%D7%94" target="_blank" rel="noreferrer">ניווט למספרה</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <strong>נהריה</strong>
+                <span>ברב מימון 18</span>
+              </div>
+              <div class="stat">
+                <strong>052-208-5223</strong>
+                <span>טלפון לתיאום</span>
+              </div>
+              <div class="stat">
+                <strong>@tal_el_barbershop</strong>
+                <span>עוד עבודות באינסטגרם</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal" aria-label="תספורת של טל אלביליה">
+            <div class="hero-badge">
+              <div>
+                <strong>Tal El Barber Shop</strong>
+                <span>דיוק, ניקיון וקו חד בכל זווית</span>
+              </div>
+              <div>
+                <strong>קביעת תור מהירה</strong>
+                <span>שיחה, וואטסאפ או אינסטגרם</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container" id="about">
+        <div class="section-head">
+          <div>
+            <div class="section-tag">The Cut Philosophy</div>
+            <h2>מראה חד בלי רעש מיותר</h2>
+          </div>
+          <p>
+            הדגש כאן הוא על גימור נקי, התאמה אישית למבנה הפנים וסטייל שנראה חזק גם
+            מקרוב וגם ביום שאחרי. כל פרט בעמוד בנוי כדי לשדר את אותה תחושה.
+          </p>
+        </div>
+        <div class="cards">
+          <article class="card reveal">
+            <h3>פיידים מדויקים</h3>
+            <p>
+              מעברים חלקים, קו צוואר נקי ותוצאה שמרגישה מחושבת ולא סתמית.
+            </p>
+          </article>
+          <article class="card reveal">
+            <h3>קווים חדים</h3>
+            <p>
+              זקן, מסגרת ופינישים קטנים שמרימים את כל הלוק לרמה אחרת.
+            </p>
+          </article>
+          <article class="card reveal">
+            <h3>שירות אישי</h3>
+            <p>
+              התאמה לסגנון שלך, לקצב שלך ולרושם שאתה רוצה להוציא מהכיסא.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container" id="gallery">
+        <div class="section-head">
+          <div>
+            <div class="section-tag">Gallery</div>
+            <h2>תוצאות שמדברות לבד</h2>
+          </div>
+          <p>
+            מבחר עבודות מתוך המספרה שמציגות דיוק, אחידות וניקיון בגימור. התמונות כאן
+            יושבות בחזית כדי לתת תחושה אמיתית של העבודה, לא רק טקסט שיווקי.
+          </p>
+        </div>
+        <div class="gallery">
+          <figure class="gallery-card large reveal">
+            <img src="IMG_5941.jpeg" alt="פייד קלאסי של Tal El Barber Shop" />
+            <figcaption class="label">Classic fade</figcaption>
+          </figure>
+          <figure class="gallery-card reveal">
+            <img src="IMG_5942.jpeg" alt="תספורת נקייה בנהריה" />
+            <figcaption class="label">Clean finish</figcaption>
+          </figure>
+          <figure class="gallery-card reveal">
+            <img src="IMG_5943.jpeg" alt="תספורת גברים של טל אלביליה" />
+            <figcaption class="label">Sharp line</figcaption>
+          </figure>
+          <figure class="gallery-card reveal">
+            <img src="IMG_5944.jpeg" alt="עבודת פייד חדה" />
+            <figcaption class="label">Premium fade</figcaption>
+          </figure>
+          <figure class="gallery-card reveal">
+            <img src="IMG_5947.jpeg" alt="גימור חד של ברבר בנהריה" />
+            <figcaption class="label">Detail work</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section container" id="contact">
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <div class="section-tag">Book Your Spot</div>
+            <h2>קובעים תור ומגיעים חד</h2>
+            <div class="contact-list">
+              <div class="contact-item">
+                <strong>טלפון</strong>
+                <a href="tel:0522085223">052-208-5223</a>
+              </div>
+              <div class="contact-item">
+                <strong>כתובת</strong>
+                <span>ברב מימון 18, נהריה</span>
+              </div>
+              <div class="contact-item">
+                <strong>אינסטגרם</strong>
+                <a href="https://www.instagram.com/tal_el_barbershop?igsh=MXRvczY3djR4emp0cQ==" target="_blank" rel="noreferrer">@tal_el_barbershop</a>
+              </div>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="tel:0522085223">לחיוג מיידי</a>
+              <a class="btn btn-secondary" href="https://wa.me/972522085223" target="_blank" rel="noreferrer">שלח הודעה</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      Tal El Barber Shop | טל אלביליה | ברב מימון 18, נהריה | 052-208-5223
+    </footer>
+    <script>
+      const sections = Array.from(document.querySelectorAll("section[id]"));
+      const navLinks = Array.from(document.querySelectorAll(".nav a[href^='#']"));
+      const revealItems = Array.from(document.querySelectorAll(".reveal"));
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      revealItems.forEach((item, index) => {
+        item.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+        revealObserver.observe(item);
+      });
+
+      const setActiveLink = () => {
+        const currentOffset = window.scrollY + 160;
+        let currentId = "";
+
+        sections.forEach((section) => {
+          if (currentOffset >= section.offsetTop) {
+            currentId = section.id;
+          }
+        });
+
+        navLinks.forEach((link) => {
+          const isCurrent = link.getAttribute("href") === `#${currentId}`;
+          link.classList.toggle("is-active", isCurrent);
+        });
+      };
+
+      window.addEventListener("load", setActiveLink);
+      window.addEventListener("scroll", setActiveLink, { passive: true });
+    </script>
+  </body>
+</html>
